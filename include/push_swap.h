@@ -6,18 +6,28 @@
 # define ERROR_ARGUMENT_NOT_A_NUMBER "At least one argument is not an integer."
 # define ERROR_ARGUMENT_DUPLICATED "At least one argument is duplicated."
 # define ERROR_MALLOC "It was not possible to allocate memory."
+# define N_STACKS 2
 
 typedef struct s_stack
 {
 	int	*values;
-	int	length;
+	size_t	top;
 }	t_stack;
 
-typedef struct s_program_args
+typedef struct s_program
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-	char	*error_message;
-}	t_program_args;
+	t_stack	stacks[N_STACKS];
+	size_t	n_elements;
+}	t_program;
+
+void	initialize_program(t_program *p, int argc);
+void	exit_program(t_program *p, char *error_message);
+
+void	t_stack_create(t_stack *s, t_program *p);
+void	t_stack_delete(t_stack *s);
+
+void	fill_stack_a(t_stack *a, char **argv, t_program *p);
+
+void	swap(t_stack *a, t_stack *b);
 
 #endif
