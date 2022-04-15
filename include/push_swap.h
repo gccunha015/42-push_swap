@@ -1,11 +1,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "ft_printf.h"
-# define ERROR_ARGUMENT_QUANTITY "The number of arguments is wrong.\n\t"\
-					"Valid example : ./push_swap 2 1 0 -1 -2"
-# define ERROR_ARGUMENT_NOT_A_NUMBER "At least one argument is not an integer."
-# define ERROR_ARGUMENT_DUPLICATED "At least one argument is duplicated."
-# define ERROR_MALLOC "It was not possible to allocate memory."
 
 enum	e_operations
 {
@@ -36,7 +31,7 @@ typedef struct s_program
 }	t_program;
 
 void	initialize_program(t_program *p, int argc);
-void	exit_program(t_program *p, char *error_message);
+void	exit_program(t_program *p, int exit_code);
 
 void	stack_create(t_stack *s, int size, t_program *p);
 void	stack_delete(t_stack *s);
@@ -51,5 +46,6 @@ void	swap(int operation, t_program *p);
 void	swap_values(int *x, int *y);
 void	push(int operation, t_program *pr);
 void	rotate(int operation, t_program *p);
+void	reverse_rotate(int operation, t_program *p);
 
 #endif

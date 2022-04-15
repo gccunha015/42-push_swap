@@ -6,20 +6,17 @@ static void	program_create(t_program *p, int n_elements);
 void	initialize_program(t_program *p, int argc)
 {
 	if (argc < 2)
-		exit_program(NULL, ERROR_ARGUMENT_QUANTITY);
+		exit_program(NULL, EXIT_SUCCESS);
 	program_create(p, argc - 1);
 }
 
-void	exit_program(t_program *p, char *error_message)
+void	exit_program(t_program *p, int exit_code)
 {
 	if (p)
 		program_delete(p);
-	if (error_message)
-	{
-		ft_printf("Error:\n\t%s\n", error_message);
-		exit(EXIT_FAILURE);
-	}
-	exit(EXIT_SUCCESS);
+	if (exit_code)
+		ft_printf("Error\n");
+	exit(exit_code);
 }
 
 static void	program_delete(t_program *p)

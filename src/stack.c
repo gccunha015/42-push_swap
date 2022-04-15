@@ -4,7 +4,7 @@ void	stack_create(t_stack *s, int size, t_program *p)
 {
 	s->values = ft_calloc(size, sizeof(*s->values));
 	if (!s->values)
-		exit_program(p, ERROR_MALLOC);
+		exit_program(p, EXIT_FAILURE);
 	s->size = size;
 	s->top = -1;
 }

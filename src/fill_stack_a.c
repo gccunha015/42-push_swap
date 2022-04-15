@@ -14,13 +14,16 @@ void	fill_stack_a(t_stack *a, char **argv, t_program *p)
 	{
 		ft_striteri(argv[i], mark_x_when_not_a_number);
 		if (ft_strchr(argv[i], 'x'))
-			exit_program(p, ERROR_ARGUMENT_NOT_A_NUMBER);
+			exit_program(p, EXIT_FAILURE);
 		k = a->size - 1;
 		a->values[k - i] = ft_atoi(argv[i]);
+		if ((a->values[k - i] == -1 && ft_strncmp(argv[i], "-1", ft_strlen(argv[i])))
+			|| (!a->values[k - i] && ft_strncmp(argv[i], "0", ft_strlen(argv[i]))))
+			exit_program(p, EXIT_FAILURE);
 		j = a->size;
 		while (--j > i)
 			if (a->values[k - j] == a->values[k - i])
-				exit_program(p, ERROR_ARGUMENT_DUPLICATED);
+				exit_program(p, EXIT_FAILURE);
 		a->top++;
 	}
 }
