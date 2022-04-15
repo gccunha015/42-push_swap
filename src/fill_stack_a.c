@@ -4,13 +4,13 @@ static void	mark_x_when_not_a_number(unsigned int iteration, char *c);
 
 void	fill_stack_a(t_stack *a, char **argv, t_program *p)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int	i;
+	int	j;
+	int	k;
 
 	argv++;
 	i = a->size;
-	while (--i != (size_t) -1)
+	while (--i >= 0)
 	{
 		ft_striteri(argv[i], mark_x_when_not_a_number);
 		if (ft_strchr(argv[i], 'x'))

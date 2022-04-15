@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 static void	program_delete(t_program *p);
-static void	program_create(t_program *p, size_t n_elements);
+static void	program_create(t_program *p, int n_elements);
 
 void	initialize_program(t_program *p, int argc)
 {
@@ -28,7 +28,7 @@ static void	program_delete(t_program *p)
 	stack_delete(&p->stack_b);
 }
 
-static void	program_create(t_program *p, size_t n_elements)
+static void	program_create(t_program *p, int n_elements)
 {
 	stack_create(&p->stack_a, n_elements, p);
 	stack_create(&p->stack_b, n_elements, p);

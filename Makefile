@@ -1,5 +1,11 @@
 NAME			= push_swap
-SRC			= push_swap.c program.c stack.c fill_stack_a.c swap.c
+SRC			= push_swap.c \
+			  program.c \
+			  stack.c \
+			  fill_stack_a.c \
+			  swap.c \
+			  push.c \
+			  rotate.c
 OBJECTS			= $(SRC:%.c=obj/%.o)
 INCLUDES		= -Iinclude -Ilibft/include
 MAKE_IN_PATH		= $(MAKE) -sC
@@ -7,7 +13,7 @@ MAKE_LIBFT		= $(MAKE_IN_PATH) libft
 LIBFT			= libft/libft.a
 LIBRARIES		= -Llibft -lft
 CC			= cc
-CC_FLAGS		= -Wall -Wextra -Werror
+CC_FLAGS		= -Wall -Wextra -Werror -g
 MKDIR			= mkdir -p
 RM			= rm -fr
 VALGRIND		= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes

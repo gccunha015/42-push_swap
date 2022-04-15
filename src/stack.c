@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	stack_create(t_stack *s, size_t size, t_program *p)
+void	stack_create(t_stack *s, int size, t_program *p)
 {
 	s->values = ft_calloc(size, sizeof(*s->values));
 	if (!s->values)
@@ -19,7 +19,7 @@ void	stack_delete(t_stack *s)
 
 int	stack_is_empty(t_stack *s)
 {
-	return (s->top == (size_t) -1);
+	return (s->top == -1);
 }
 
 int	stack_has_at_least_2_elements(t_stack *s)
@@ -40,9 +40,9 @@ int	stack_push(t_stack *s, int value)
 	return (1);
 }
 
-int	stack_pop(t_stack *s)
+int	*stack_pop(t_stack *s)
 {
 	if (stack_is_empty(s))
-		return (0);
-	return (s->values[s->top--]);
+		return (NULL);
+	return (&s->values[s->top--]);
 }

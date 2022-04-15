@@ -1,25 +1,34 @@
 #include "push_swap.h"
 
-static int	p(t_stack *a, t_stack *b);
+static int	p(t_stack *target, t_stack *source);
 static void	print_operation(int o);
 
-void	push(int operation, t_program *p)
+void	push(int operation, t_program *pr)
 {
 	int	pushed;
 
 	if (operation == PA)
-		pushed = p(&p->stack_a, &p->stack_b);
+		pushed = p(&pr->stack_a, &pr->stack_b);
 	else if (operation == PB)
-		pushed = p(&p->stack_b, &p->stack_a);
+		pushed = p(&pr->stack_b, &pr->stack_a);
+	else
+		pushed = 0;
 	if (pushed)
 		print_operation(operation);
 }
 
-static int	p(t_stack *a, t_stack *b)
+static int	p(t_stack *target, t_stack *source)
 {
-	if (stack_is_empty(b))
+	int	*top;
+
+	top = stack_pop(source);
+	if (!top)
 		return (0);
-	stack_push(a, stack_pop(b));
+	if (!stack_push(target, *top))
+	{
+		stack_push(source, *top);
+		return (0);
+	}
 	return (1);
 }
 

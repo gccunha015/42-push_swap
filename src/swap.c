@@ -24,6 +24,8 @@ void	swap(int operation, t_program *p)
 		else if (operation == SB)
 			swapped = 1;
 	}
+	else
+		swapped = 0;
 	if (swapped)
 		print_operation(operation);
 }
