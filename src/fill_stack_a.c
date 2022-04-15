@@ -9,15 +9,15 @@ void	fill_stack_a(t_stack *a, char **argv, t_program *p)
 	size_t	k;
 
 	argv++;
-	i = p->n_elements;
+	i = a->size;
 	while (--i != (size_t) -1)
 	{
 		ft_striteri(argv[i], mark_x_when_not_a_number);
 		if (ft_strchr(argv[i], 'x'))
 			exit_program(p, ERROR_ARGUMENT_NOT_A_NUMBER);
-		k = p->n_elements - 1;
+		k = a->size - 1;
 		a->values[k - i] = ft_atoi(argv[i]);
-		j = p->n_elements;
+		j = a->size;
 		while (--j > i)
 			if (a->values[k - j] == a->values[k - i])
 				exit_program(p, ERROR_ARGUMENT_DUPLICATED);

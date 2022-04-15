@@ -1,31 +1,59 @@
 #include "push_swap.h"
 
-static void	swap_elements(t_stack *s);
+static int	s(t_stack *s);
+void	swap_values(int *x, int *y);
+static void	print_operation(int o);
 
-void	swap(t_stack *a, t_stack *b)
+void	swap(int operation, t_program *p)
 {
-	char	*operation;
+	int	swapped;
 
-	if (a)
+	if (operation == SA)
+		swapped = s(&p->stack_a);
+	else if (operation == SB)
+		swapped = s(&p->stack_b);
+	else if (operation == SS)
 	{
-		swap_elements(a);
-		operation = "sa";
+		swapped = s(&p->stack_a);
+		if (s(&p->stack_b))
+			operation = SB;
+		if (swapped && operation == SB)
+			operation = SS;
+		else if (swapped)
+			operation = SA;
+		else if (operation == SB)
+			swapped = 1;
 	}
-	if (b)
-	{
-		swap_elements(b);
-		operation = "sb";
-	}
-	if (a && b)
-		operation = "ss";
-	ft_printf("%s\n", operation);
+	if (swapped)
+		print_operation(operation);
 }
 
-static void	swap_elements(t_stack *s)
+static int	s(t_stack *s)
+{
+	if (!stack_has_at_least_2_elements(s))
+		return (0);
+	swap_values(&s->values[s->top], &s->values[s->top - 1]);
+	return (1);
+}
+
+void	swap_values(int *x, int *y)
 {
 	int	aux;
 
-	aux = s->values[s->top];
-	s->values[s->top] = s->values[s->top - 1];
-	s->values[s->top - 1] = aux;
+	aux = *x;
+	*x = *y;
+	*y = aux;
+}
+
+static void	print_operation(int o)
+{
+	char	*operation;
+
+	if (o == SA)
+		operation = "sa";
+	else if (o == SB)
+		operation = "sb";
+	else
+		operation = "ss";
+	ft_printf("%s\n", operation);
 }
