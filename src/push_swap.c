@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-static void	print_stacks(t_program p);
+static void	print_stacks(t_program p, char *state);
 
 int	main(int argc, char **argv)
 {
@@ -8,19 +8,20 @@ int	main(int argc, char **argv)
 
 	initialize_program(&program, argc);
 	fill_stack_a(&program.stack_a, argv, &program);
-	print_stacks(program);
-	reverse_rotate(RRR, &program);
-	print_stacks(program);
-	rotate(RR, &program);
-	print_stacks(program);
+	print_stacks(program, "Original");
+	/*
+	sort(&program);
+	print_stacks(program, "Sorted");
+	*/
 	exit_program(&program, EXIT_SUCCESS);
 }
 
-static void	print_stacks(t_program p)
+static void	print_stacks(t_program p, char *state)
 {
 	int	*a, *b;
 	char	*separator = "-----------";
 
+	ft_printf("%s :\n", state);
 	ft_printf("| %s | %s |\n", separator, separator);
 	for (int i = 0; i < p.stack_a.size; i++)
 	{

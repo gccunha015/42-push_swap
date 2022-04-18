@@ -1,37 +1,35 @@
 #include "push_swap.h"
 
-static void	mark_x_when_not_a_number(unsigned int iteration, char *c);
+static void	check_if_is_integer(char *arg, int value, t_program *p);
+static void	check_if_is_duplicate(t_stack *a, t_program *p);
 
 void	fill_stack_a(t_stack *a, char **argv, t_program *p)
 {
 	int	i;
-	int	j;
-	int	k;
 
 	argv++;
 	i = a->size;
 	while (--i >= 0)
 	{
-		ft_striteri(argv[i], mark_x_when_not_a_number);
-		if (ft_strchr(argv[i], 'x'))
-			exit_program(p, EXIT_FAILURE);
-		k = a->size - 1;
-		a->values[k - i] = ft_atoi(argv[i]);
-		if ((a->values[k - i] == -1 && ft_strncmp(argv[i], "-1", ft_strlen(argv[i])))
-			|| (!a->values[k - i] && ft_strncmp(argv[i], "0", ft_strlen(argv[i]))))
-			exit_program(p, EXIT_FAILURE);
-		j = a->size;
-		while (--j > i)
-			if (a->values[k - j] == a->values[k - i])
-				exit_program(p, EXIT_FAILURE);
-		a->top++;
+		stack_push(a, ft_atoi(argv[i]));
+		check_if_is_integer(argv[i], a->values[a->top], p);
+		check_if_is_duplicate(a, p);
 	}
 }
 
-static void	mark_x_when_not_a_number(unsigned int iteration, char *c)
+static void	check_if_is_integer(char *arg, int value, t_program *p)
 {
-	(void) iteration;
-	if (!*c || ft_isdigit(*c) || (ft_strchr("-+", *c) && ft_isdigit(*(c + 1))))
-		return ;
-	*c = 'x';
+	if ((!value && ft_strncmp(arg, "0", ft_strlen(arg)))
+		|| (value == -1 && ft_strncmp(arg, "-1", ft_strlen(arg))))
+		exit_program(p, EXIT_FAILURE);
+}
+
+static void	check_if_is_duplicate(t_stack *a, t_program *p)
+{
+	int	i;
+
+	i = -1;
+	while (++i < a->top)
+		if (a->values[i] == a->values[a->top])
+			exit_program(p, EXIT_FAILURE);
 }

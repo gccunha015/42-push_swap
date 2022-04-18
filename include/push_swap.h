@@ -48,4 +48,6 @@ void	push(int operation, t_program *pr);
 void	rotate(int operation, t_program *p);
 void	reverse_rotate(int operation, t_program *p);
 
+void	sort(t_program *p);
+
 #endif
