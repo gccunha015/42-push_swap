@@ -1,7 +1,6 @@
 #include "push_swap.h"
 
 static int	p(t_stack *target, t_stack *source);
-static void	print_operation(int o);
 
 void	push(int operation, t_program *pr)
 {
@@ -14,7 +13,7 @@ void	push(int operation, t_program *pr)
 	else
 		pushed = 0;
 	if (pushed)
-		print_operation(operation);
+		print_operation(operation, *pr);
 }
 
 static int	p(t_stack *target, t_stack *source)
@@ -30,15 +29,4 @@ static int	p(t_stack *target, t_stack *source)
 		return (0);
 	}
 	return (1);
-}
-
-static void	print_operation(int o)
-{
-	char	*operation;
-
-	if (o == PA)
-		operation = "pa";
-	else
-		operation = "pb";
-	ft_printf("%s\n", operation);
 }

@@ -17,6 +17,12 @@ enum	e_operations
 	RRR
 };
 
+enum	e_order
+{
+	ASCENDING,
+	DESCENDING
+};
+
 typedef struct s_stack
 {
 	int	*values;
@@ -29,6 +35,8 @@ typedef struct s_program
 	t_stack	stack_a;
 	t_stack	stack_b;
 }	t_program;
+
+void	print_stacks(t_program p);
 
 void	initialize_program(t_program *p, int argc);
 void	exit_program(t_program *p, int exit_code);
@@ -47,6 +55,8 @@ void	swap_values(int *x, int *y);
 void	push(int operation, t_program *pr);
 void	rotate(int operation, t_program *p);
 void	reverse_rotate(int operation, t_program *p);
+
+void	print_operation(int o, t_program p);
 
 void	sort(t_program *p);
 

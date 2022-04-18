@@ -1,7 +1,6 @@
 #include "push_swap.h"
 
 static int	r(t_stack *s);
-static void	print_operation(int o);
 
 void	rotate(int operation, t_program *p)
 {
@@ -26,7 +25,7 @@ void	rotate(int operation, t_program *p)
 	else
 		rotated = 0;
 	if (rotated)
-		print_operation(operation);
+		print_operation(operation, *p);
 }
 
 static int	r(t_stack *s)
@@ -39,17 +38,4 @@ static int	r(t_stack *s)
 	while (++i <= s->top)
 		swap_values(&s->values[0], &s->values[i]);
 	return (1);
-}
-
-static void	print_operation(int o)
-{
-	char	*operation;
-
-	if (o == RA)
-		operation = "ra";
-	else if (o == RB)
-		operation = "rb";
-	else
-		operation = "rr";
-	ft_printf("%s\n", operation);
 }

@@ -2,7 +2,6 @@
 
 static int	s(t_stack *s);
 void	swap_values(int *x, int *y);
-static void	print_operation(int o);
 
 void	swap(int operation, t_program *p)
 {
@@ -27,7 +26,7 @@ void	swap(int operation, t_program *p)
 	else
 		swapped = 0;
 	if (swapped)
-		print_operation(operation);
+		print_operation(operation, *p);
 }
 
 static int	s(t_stack *s)
@@ -45,17 +44,4 @@ void	swap_values(int *x, int *y)
 	aux = *x;
 	*x = *y;
 	*y = aux;
-}
-
-static void	print_operation(int o)
-{
-	char	*operation;
-
-	if (o == SA)
-		operation = "sa";
-	else if (o == SB)
-		operation = "sb";
-	else
-		operation = "ss";
-	ft_printf("%s\n", operation);
 }
