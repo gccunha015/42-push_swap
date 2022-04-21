@@ -8,7 +8,10 @@ int	main(int argc, char **argv)
 
 	initialize_program(&program, argc);
 	fill_stack_a(&program, argv);
-	sort(&program);
+	for (int i = 0; i < program.stack_a.size; i++)
+		ft_printf("%i ", program.indices[i]);
+	ft_printf("\n");
+	//sort(&program);
 	exit_program(&program, EXIT_SUCCESS);
 }
 

@@ -35,6 +35,7 @@ typedef struct s_program
 {
 	t_stack	stack_a;
 	t_stack	stack_b;
+	int	*indices;
 }	t_program;
 
 void	print_stacks(t_program p);

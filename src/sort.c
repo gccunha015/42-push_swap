@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 void	radix_sort(t_stack *a, t_stack *b);
-void	count_sort(t_stack *a, t_stack *b, int base);
+void	count_sort(t_stack *a, t_stack *b, int decimal_place);
 int	stack_is_sorted(t_stack *s, int last, int order);
 int	stack_get_max(t_stack *s);
 int	stack_get_min(t_stack *s);
@@ -22,19 +22,17 @@ void	sort(t_program *p)
 
 void	radix_sort(t_stack *a, t_stack *b)
 {
-	int	max;
-	int	base;
+	int	decimal_place;
 
-	max = a->values[stack_get_max(a)];
-	base = 1;
-	while (max / base > 0)
+	decimal_place = 1;
+	while (a->size / decimal_place > 0)
 	{
-		count_sort(a, b, base);
-		base *= 10;
+		count_sort(a, b, decimal_place);
+		decimal_place *= 10;
 	}
 }
 
-void	count_sort(t_stack *a, t_stack *b, int base)
+void	count_sort(t_stack *a, t_stack *b, int decimal_place)
 {
 	int	i;
 	int	count[10];
@@ -42,15 +40,16 @@ void	count_sort(t_stack *a, t_stack *b, int base)
 	ft_bzero(count, sizeof(count));
 	i = -1;
 	while (++i < a->size)
-		count[(a->values[i] / base) % 10]++;
+		count[(a->values[i] / decimal_place) % 10]++;
 	i = 0;
 	while (++i < 10)
 		count[i] += count[i - 1];
 	i = a->size;
 	while (--i >= 0)
 	{
-		b->values[count[(a->values[i] / base) % 10] - 1] = a->values[i];
-		count[(a->values[i] / base) % 10]--;
+		b->values[count[(a->values[i] / decimal_place) % 10] - 1]
+			= a->values[i];
+		count[(a->values[i] / decimal_place) % 10]--;
 	}
 	i = -1;
 	while (++i < a->size)

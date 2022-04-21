@@ -23,10 +23,15 @@ static void	program_delete(t_program *p)
 {
 	stack_delete(&p->stack_a);
 	stack_delete(&p->stack_b);
+	free(p->indices);
+	p->indices = NULL;
 }
 
 static void	program_create(t_program *p, int n_elements)
 {
 	stack_create(&p->stack_a, 'a', n_elements, p);
 	stack_create(&p->stack_b, 'b', n_elements, p);
+	p->indices = ft_calloc(n_elements, sizeof(*p->indices));
+	if (!p->indices)
+		exit_program(p, EXIT_FAILURE);
 }
