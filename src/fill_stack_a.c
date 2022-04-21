@@ -3,10 +3,12 @@
 static void	check_if_is_integer(char *arg, int value, t_program *p);
 static void	check_if_is_duplicate(t_stack *a, t_program *p);
 
-void	fill_stack_a(t_stack *a, char **argv, t_program *p)
+void	fill_stack_a(t_program *p, char **argv)
 {
+	t_stack *a;
 	int	i;
 
+	a = &p->stack_a;
 	argv++;
 	i = a->size;
 	while (--i >= 0)

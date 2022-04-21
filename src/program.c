@@ -27,6 +27,6 @@ static void	program_delete(t_program *p)
 
 static void	program_create(t_program *p, int n_elements)
 {
-	stack_create(&p->stack_a, n_elements, p);
-	stack_create(&p->stack_b, n_elements, p);
+	stack_create(&p->stack_a, 'a', n_elements, p);
+	stack_create(&p->stack_b, 'b', n_elements, p);
 }

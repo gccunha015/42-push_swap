@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 	t_program	program;
 
 	initialize_program(&program, argc);
-	fill_stack_a(&program.stack_a, argv, &program);
+	fill_stack_a(&program, argv);
 	sort(&program);
 	exit_program(&program, EXIT_SUCCESS);
 }
@@ -18,10 +18,14 @@ void	print_stacks(t_program p)
 	char	*separator = "-----------";
 
 	ft_printf("| %s | %s |\n", separator, separator);
-	for (int i = 0; i < p.stack_a.size; i++)
+	for (int i = p.stack_a.size - 1; i > -1; i--)
 	{
-		a = stack_pop(&p.stack_a);
-		b = stack_pop(&p.stack_b);
+		a = NULL;
+		b = NULL;
+		if (p.stack_a.top == i)
+			a = stack_pop(&p.stack_a);
+		if (p.stack_b.top == i)
+			b = stack_pop(&p.stack_b);
 		if (a && b)
 			ft_printf("| %11i | %11i ", *a, *b);
 		else if (a)
