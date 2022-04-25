@@ -2,30 +2,19 @@
 
 static int	s(t_stack *s);
 
-void	swap(int operation, t_program *p)
+int	swap(char *operation, t_program *p)
 {
 	int	swapped;
 
-	if (operation == SA)
+	if (!ft_strncmp(operation, SA, ft_strlen(operation)))
 		swapped = s(&p->stack_a);
-	else if (operation == SB)
+	else if (!ft_strncmp(operation, SB, ft_strlen(operation)))
 		swapped = s(&p->stack_b);
-	else if (operation == SS)
-	{
-		swapped = s(&p->stack_a);
-		if (s(&p->stack_b))
-			operation = SB;
-		if (swapped && operation == SB)
-			operation = SS;
-		else if (swapped)
-			operation = SA;
-		else if (operation == SB)
-			swapped = 1;
-	}
+	else if (!ft_strncmp(operation, SS, ft_strlen(operation)))
+		swapped = s(&p->stack_a) && s(&p->stack_b);
 	else
 		swapped = 0;
-	if (swapped)
-		print_operation(operation, *p);
+	return (swapped);
 }
 
 static int	s(t_stack *s)

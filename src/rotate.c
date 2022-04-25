@@ -2,30 +2,19 @@
 
 static int	r(t_stack *s);
 
-void	rotate(int operation, t_program *p)
+int	rotate(char *operation, t_program *p)
 {
 	int	rotated;
 
-	if (operation == RA)
+	if (!ft_strncmp(operation, RA, ft_strlen(operation)))
 		rotated = r(&p->stack_a);
-	else if (operation == RB)
+	else if (!ft_strncmp(operation, RB, ft_strlen(operation)))
 		rotated = r(&p->stack_b);
-	else if (operation == RR)
-	{
-		rotated = r(&p->stack_a);
-		if (r(&p->stack_b))
-			operation = RB;
-		if (rotated && operation == RB)
-			operation = RR;
-		else if (rotated)
-			operation = RA;
-		else if (operation == RB)
-			rotated = 1;
-	}
+	else if (!ft_strncmp(operation, RR, ft_strlen(operation)))
+		rotated = r(&p->stack_a) && r(&p->stack_b);
 	else
 		rotated = 0;
-	if (rotated)
-		print_operation(operation, *p);
+	return (rotated);
 }
 
 static int	r(t_stack *s)

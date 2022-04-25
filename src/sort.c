@@ -7,14 +7,9 @@ int	stack_get_max(t_stack *s);
 
 void	sort(t_program *p)
 {
-	t_stack	*a;
-	t_stack	*b;
-
 	print_stacks(*p);
 
-	a = &p->stack_a;
-	b = &p->stack_b;
-	radix_sort(a, b);
+	radix_sort(&p->stack_a, &p->stack_b);
 	
 	print_stacks(*p);
 }
@@ -50,9 +45,9 @@ void	count_sort(t_stack *a, t_stack *b, int decimal_place)
 			= a->nodes[i];
 		count[(a->nodes[i].index / decimal_place) % 10]--;
 	}
-	i = -1;
-	while (++i < a->size)
-		a->nodes[i] = b->nodes[i];
+	i = a->size;
+	while (--i > -1)
+		a->nodes[i] = b->nodes[a->size - 1 - i];
 }
 
 int	stack_is_sorted(t_stack *s, int last, int order)

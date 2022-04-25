@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 
 	initialize_program(&program, argc);
 	fill_stack_a(&program, argv);
-	print_stacks(program);
+	sort(&program);
 	exit_program(&program, EXIT_SUCCESS);
 }
 

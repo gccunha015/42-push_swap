@@ -1,21 +1,21 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "ft_printf.h"
-
-enum	e_operations
-{
-	SA = 1,
-	SB,
-	SS,
-	PA,
-	PB,
-	RA,
-	RB,
-	RR,
-	RRA,
-	RRB,
-	RRR
-};
+# define SWAP "sa sb ss"
+# define PUSH "pa pb"
+# define ROTATE "ra rb rr"
+# define REVERSE_ROTATE "rra rrb rrr"
+# define SA "sa"
+# define SB "sb"
+# define SS "ss"
+# define PA "pa"
+# define PB "pb"
+# define RA "ra"
+# define RB "rb"
+# define RR "rr"
+# define RRA "rra"
+# define RRB "rrb"
+# define RRR "rrr"
 
 enum	e_order
 {
@@ -57,13 +57,13 @@ t_node	*stack_pop(t_stack *s);
 
 void	fill_stack_a(t_program *p, char **argv);
 
-void	swap(int operation, t_program *p);
+int	swap(char *operation, t_program *p);
 void	swap_nodes(t_node *x, t_node *y);
-void	push(int operation, t_program *p);
-void	rotate(int operation, t_program *p);
-void	reverse_rotate(int operation, t_program *p);
+int	push(char *operation, t_program *p);
+int	rotate(char *operation, t_program *p);
+int	reverse_rotate(char *operation, t_program *p);
 
-void	print_operation(int o, t_program p);
+void	operate(char *operation, t_program *p);
 
 int	stack_get_min(t_stack *s);
 int	stack_get_max(t_stack *s);

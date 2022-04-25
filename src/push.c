@@ -1,22 +1,21 @@
 #include "push_swap.h"
 
-static int	p(t_stack *target, t_stack *source);
+static int	p_(t_stack *target, t_stack *source);
 
-void	push(int operation, t_program *pr)
+int	push(char *operation, t_program *p)
 {
 	int	pushed;
 
-	if (operation == PA)
-		pushed = p(&pr->stack_a, &pr->stack_b);
-	else if (operation == PB)
-		pushed = p(&pr->stack_b, &pr->stack_a);
+	if (!ft_strncmp(operation, PA, ft_strlen(operation)))
+		pushed = p_(&p->stack_a, &p->stack_b);
+	else if (!ft_strncmp(operation, PB, ft_strlen(operation)))
+		pushed = p_(&p->stack_b, &p->stack_a);
 	else
 		pushed = 0;
-	if (pushed)
-		print_operation(operation, *pr);
+	return (pushed);
 }
 
-static int	p(t_stack *target, t_stack *source)
+static int	p_(t_stack *target, t_stack *source)
 {
 	t_node	*top;
 
