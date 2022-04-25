@@ -2,23 +2,23 @@
 
 static void	check_if_is_integer(char *arg, int value, t_program *p);
 static void	check_if_is_duplicate(t_stack *a, t_program *p);
-static void	index_values(int *indices, t_stack *a, int i);
+static void	index_values(t_stack *a);
 
 void	fill_stack_a(t_program *p, char **argv)
 {
 	t_stack *a;
 	int	i;
 
-	a = &p->stack_a;
 	argv++;
+	a = &p->stack_a;
 	i = a->size;
 	while (--i >= 0)
 	{
-		stack_push(a, ft_atoi(argv[i]));
-		check_if_is_integer(argv[i], a->values[a->top], p);
+		stack_push(a, (t_node){ft_atoi(argv[i]), a->size - 1});
+		check_if_is_integer(argv[i], a->nodes[a->top].value, p);
 		check_if_is_duplicate(a, p);
-		index_values(p->indices, a, i);
 	}
+	index_values(a);
 }
 
 static void	check_if_is_integer(char *arg, int value, t_program *p)
@@ -34,19 +34,21 @@ static void	check_if_is_duplicate(t_stack *a, t_program *p)
 
 	i = -1;
 	while (++i < a->top)
-		if (a->values[i] == a->values[a->top])
+		if (a->nodes[i].value == a->nodes[a->top].value)
 			exit_program(p, EXIT_FAILURE);
 }
 
-static void	index_values(int *indices, t_stack *a, int i)
+static void	index_values(t_stack *a)
 {
+	int	i;
 	int	j;
-	int	k;
 
-	j = a->size - 1 - i;
-	indices[j] = a->values[a->top];
-	k = -1;
-	while (++k < j)
-		if (indices[k] > indices[j])
-			swap_values(&indices[k], &indices[j]);
+	i = -1;
+	while (++i < a->size)
+	{
+		j = -1;
+		while (++j < a->size)
+			if (a->nodes[i].value < a->nodes[j].value)
+				a->nodes[i].index--;
+	}
 }

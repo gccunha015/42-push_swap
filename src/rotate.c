@@ -36,6 +36,6 @@ static int	r(t_stack *s)
 		return (0);
 	i = 0;
 	while (++i <= s->top)
-		swap_values(&s->values[0], &s->values[i]);
+		swap_nodes(&s->nodes[0], &s->nodes[i]);
 	return (1);
 }

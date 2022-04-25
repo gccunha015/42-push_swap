@@ -18,7 +18,7 @@ void	push(int operation, t_program *pr)
 
 static int	p(t_stack *target, t_stack *source)
 {
-	int	*top;
+	t_node	*top;
 
 	top = stack_pop(source);
 	if (!top)

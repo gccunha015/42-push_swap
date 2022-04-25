@@ -1,7 +1,6 @@
 #include "push_swap.h"
 
 static int	s(t_stack *s);
-void	swap_values(int *x, int *y);
 
 void	swap(int operation, t_program *p)
 {
@@ -33,13 +32,13 @@ static int	s(t_stack *s)
 {
 	if (!stack_has_at_least_2_elements(s))
 		return (0);
-	swap_values(&s->values[s->top], &s->values[s->top - 1]);
+	swap_nodes(&s->nodes[s->top], &s->nodes[s->top - 1]);
 	return (1);
 }
 
-void	swap_values(int *x, int *y)
+void	swap_nodes(t_node *x, t_node *y)
 {
-	int	aux;
+	t_node aux;
 
 	aux = *x;
 	*x = *y;
