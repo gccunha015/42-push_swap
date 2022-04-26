@@ -21,12 +21,12 @@ void	exit_program(t_program *p, int exit_code)
 
 static void	program_delete(t_program *p)
 {
-	stack_delete(&p->stack_a);
-	stack_delete(&p->stack_b);
+	stack_delete(&p->a);
+	stack_delete(&p->b);
 }
 
 static void	program_create(t_program *p, int n_elements)
 {
-	stack_create(&p->stack_a, 'a', n_elements, p);
-	stack_create(&p->stack_b, 'b', n_elements, p);
+	stack_create(&p->a, n_elements, p);
+	stack_create(&p->b, n_elements, p);
 }

@@ -17,7 +17,7 @@
 # define RRB "rrb"
 # define RRR "rrr"
 
-enum	e_order
+enum	e_sort_order
 {
 	ASCENDING,
 	DESCENDING
@@ -32,41 +32,39 @@ typedef struct s_node
 typedef struct s_stack
 {
 	t_node	*nodes;
-	char	name;
 	int	size;
 	int	top;
 }	t_stack;
 
 typedef struct s_program
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_stack	a;
+	t_stack	b;
 }	t_program;
 
-void	print_stacks(t_program p);
+void	print_stacks(t_stack a, t_stack b);
 
 void	initialize_program(t_program *p, int argc);
 void	exit_program(t_program *p, int exit_code);
 
-void	stack_create(t_stack *s, char name, int size, t_program *p);
+void	stack_create(t_stack *s, int size, t_program *p);
 void	stack_delete(t_stack *s);
 int	stack_is_empty(t_stack *s);
 int	stack_has_at_least_2_elements(t_stack *s);
-int	stack_push(t_stack *s, t_node node);
+int	stack_is_full(t_stack *s);
+void	stack_push(t_stack *s, t_node node);
 t_node	*stack_pop(t_stack *s);
 
 void	fill_stack_a(t_program *p, char **argv);
 
-int	swap(char *operation, t_program *p);
+void	swap(char *operation, t_stack *a, t_stack *b);
 void	swap_nodes(t_node *x, t_node *y);
-int	push(char *operation, t_program *p);
-int	rotate(char *operation, t_program *p);
-int	reverse_rotate(char *operation, t_program *p);
+void	push(char *operation, t_stack *a, t_stack *b);
+void	rotate(char *operation, t_stack *a, t_stack *b);
+void	reverse_rotate(char *operation, t_stack *a, t_stack *b);
 
-void	operate(char *operation, t_program *p);
+void	operate(char *operation, t_stack *a, t_stack *b);
 
-int	stack_get_min(t_stack *s);
-int	stack_get_max(t_stack *s);
-void	sort(t_program *p);
+void	sort(t_stack *a, t_stack *b);
 
 #endif

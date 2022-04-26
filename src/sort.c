@@ -3,15 +3,14 @@
 void	radix_sort(t_stack *a, t_stack *b);
 void	count_sort(t_stack *a, t_stack *b, int decimal_place);
 int	stack_is_sorted(t_stack *s, int last, int order);
-int	stack_get_max(t_stack *s);
 
-void	sort(t_program *p)
+void	sort(t_stack *a, t_stack *b)
 {
-	print_stacks(*p);
+	print_stacks(*a, *b);
 
-	radix_sort(&p->stack_a, &p->stack_b);
+	radix_sort(a, b);
 	
-	print_stacks(*p);
+	print_stacks(*a, *b);
 }
 
 void	radix_sort(t_stack *a, t_stack *b)
@@ -28,8 +27,9 @@ void	radix_sort(t_stack *a, t_stack *b)
 
 void	count_sort(t_stack *a, t_stack *b, int decimal_place)
 {
-	int	i;
 	int	count[10];
+	int	i;
+	int	pos;
 
 	ft_bzero(count, sizeof(count));
 	i = -1;
@@ -41,9 +41,9 @@ void	count_sort(t_stack *a, t_stack *b, int decimal_place)
 	i = a->size;
 	while (--i >= 0)
 	{
-		b->nodes[count[(a->nodes[i].index / decimal_place) % 10] - 1]
-			= a->nodes[i];
-		count[(a->nodes[i].index / decimal_place) % 10]--;
+		pos = (a->nodes[i].index / decimal_place) % 10;
+		b->nodes[count[pos] - 1] = a->nodes[i];
+		count[pos]--;
 	}
 	i = a->size;
 	while (--i > -1)
@@ -70,38 +70,4 @@ int	stack_is_sorted(t_stack *s, int last, int order)
 				return (0);
 	}
 	return (1);
-}
-
-int	stack_get_max(t_stack *s)
-{
-	t_node	*n;
-	int	max;
-	int	i;
-
-	if (stack_is_empty(s))
-		return (-1);
-	n = s->nodes;
-	max = 0;
-	i = 0;
-	while (++i <= s->top)
-		if (n[i].value > n[max].value)
-		       max = i;
-	return (max);
-}
-
-int	stack_get_min(t_stack *s)
-{
-	t_node	*n;
-	int	min;
-	int	i;
-
-	if (stack_is_empty(s))
-		return (-1);
-	n = s->nodes;
-	min = s->top;
-	i = s->top;
-	while (--i > -1)
-		if (n[i].value < n[min].value)
-		       min = i;
-	return (min);
 }
