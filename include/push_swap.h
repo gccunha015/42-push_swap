@@ -1,6 +1,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-# include "ft_printf.h"
+# include "libft.h"
 # define SWAP "sa sb ss"
 # define PUSH "pa pb"
 # define ROTATE "ra rb rr"
@@ -16,6 +16,10 @@
 # define RRA "rra"
 # define RRB "rrb"
 # define RRR "rrr"
+
+
+# include <stdio.h>
+
 
 enum	e_sort_order
 {

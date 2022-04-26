@@ -46,6 +46,6 @@ run:			$(NAME)
 			$(VALGRIND) ./$(NAME) $(STACK)
 
 $(LIBFT):
-			$(MAKE_LIBFT) printf
+			$(MAKE_LIBFT)
 
 .PHONY:	all clean fclean re bonus

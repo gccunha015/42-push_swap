@@ -17,8 +17,6 @@ void	swap(char *operation, t_stack *a, t_stack *b)
 
 static void	_swap(t_stack *s)
 {
-	if (!stack_has_at_least_2_elements(s))
-		return ;
 	swap_nodes(&s->nodes[s->top], &s->nodes[s->top - 1]);
 }
 

@@ -12,7 +12,5 @@ void	push(char *operation, t_stack *a, t_stack *b)
 
 static void	_push(t_stack *source, t_stack *target)
 {
-	if (stack_is_empty(source) || stack_is_full(target))
-		return ;
 	stack_push(target, *stack_pop(source));
 }

@@ -17,7 +17,7 @@ void	print_stacks(t_stack a, t_stack b)
 	t_node	*na, *nb;
 	char	*separator = "-------------------";
 
-	ft_printf("|%s|%s|\n", separator, separator);
+	printf("|%s|%s|\n", separator, separator);
 	for (int i = a.size - 1; i > -1; i--)
 	{
 		na = NULL;
@@ -28,23 +28,23 @@ void	print_stacks(t_stack a, t_stack b)
 			nb = stack_pop(&b);
 		if (na && nb)
 		{
-			ft_printf("| [%3i] %11i ", na->index, na->value);
-			ft_printf("| [%3i] %11i ", nb->index, nb->value);
+			printf("| [%3i] %11i ", na->index, na->value);
+			printf("| [%3i] %11i ", nb->index, nb->value);
 		}
 		else if (na)
 		{
-			ft_printf("| [%3i] %11i ", na->index, na->value);
-			ft_printf("| %17c ", ' ');
+			printf("| [%3i] %11i ", na->index, na->value);
+			printf("| %17c ", ' ');
 		}
 		else if (nb)
 		{
-			ft_printf("| %17c ", ' ');
-			ft_printf("| [%3i] %11i ", nb->index, nb->value);
+			printf("| %17c ", ' ');
+			printf("| [%3i] %11i ", nb->index, nb->value);
 		}
 		if (na || nb)
-			ft_printf("|\n");
+			printf("|\n");
 	}
-	ft_printf("|%s|%s|\n", separator, separator);
-	ft_printf("| %17c | %17c |\n", 'a', 'b');
-	ft_printf("|%s|%s|\n", separator, separator);
+	printf("|%s|%s|\n", separator, separator);
+	printf("| %17c | %17c |\n", 'a', 'b');
+	printf("|%s|%s|\n", separator, separator);
 }

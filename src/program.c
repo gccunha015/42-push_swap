@@ -15,7 +15,7 @@ void	exit_program(t_program *p, int exit_code)
 	if (p)
 		program_delete(p);
 	if (exit_code)
-		ft_printf("Error\n");
+		write(STDOUT_FILENO, "Error\n", 6);
 	exit(exit_code);
 }
 

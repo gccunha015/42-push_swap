@@ -19,8 +19,6 @@ static void	_rotate(t_stack *s)
 {
 	int	i;
 
-	if (!stack_has_at_least_2_elements(s))
-		return ;
 	i = 0;
 	while (++i <= s->top)
 		swap_nodes(&s->nodes[0], &s->nodes[i]);
