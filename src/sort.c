@@ -1,15 +1,15 @@
 #include "push_swap.h"
 
-void	radix_sort(t_stack *a, t_stack *b);
-void	count_sort(t_stack *a, t_stack *b, int decimal_place);
 int	stack_is_sorted(t_stack *s, int last, int order);
 int	get_min(t_stack *s);
+int	get_max(t_stack *s);
 
 void	sort(t_stack *a, t_stack *b)
 {
 	t_node	*na;
 	t_node	*nb;
-	int	i;
+	int	min;
+	int	max;
 
 	print_stacks(*a, *b);
 
@@ -17,16 +17,18 @@ void	sort(t_stack *a, t_stack *b)
 		return ;
 	na = a->nodes;
 	nb = b->nodes;
-	i = -1;
-	while (++i < a->top / 2 && na[a->top].index > na[i].index)
-		operate(RRA, a, b);
-	if (!get_min(a))
-		operate(RRA, a, b);
-	/*
-	radix_sort(a, b);	
-	print_stacks(*a, *b);
-	*/
+	while (!stack_is_sorted(a, 0, ASCENDING))
+	{
+		min = get_min(a);
+		max = get_max(a);
+		return ;
+	}
+	while (!stack_is_empty(b))
+		operate(PA, a, b);
+	(void) na;
 	(void) nb;
+	(void) min;
+	(void) max;
 }
 
 int	get_min(t_stack *s)
@@ -38,47 +40,25 @@ int	get_min(t_stack *s)
 		return (-1);
 	min = 0;
 	i = 0;
-	while (++i < s->top)
+	while (++i <= s->top)
 		if (s->nodes[i].index < s->nodes[min].index)
 			min = i;
 	return (min);
 }
 
-void	radix_sort(t_stack *a, t_stack *b)
+int	get_max(t_stack *s)
 {
-	int	decimal_place;
-
-	decimal_place = 1;
-	while (a->size / decimal_place > 0)
-	{
-		count_sort(a, b, decimal_place);
-		decimal_place *= 10;
-	}
-}
-
-void	count_sort(t_stack *a, t_stack *b, int decimal_place)
-{
-	int	count[10];
+	int	max;
 	int	i;
-	int	digit;
 
-	ft_bzero(count, sizeof(count));
-	i = -1;
-	while (++i < a->size)
-		count[(a->nodes[i].index / decimal_place) % 10]++;
+	if (stack_is_empty(s))
+		return (-1);
+	max = 0;
 	i = 0;
-	while (++i < 10)
-		count[i] += count[i - 1];
-	i = a->size;
-	while (--i >= 0)
-	{
-		digit = (a->nodes[i].index / decimal_place) % 10;
-		b->nodes[count[digit] - 1] = a->nodes[i];
-		count[digit]--;
-	}
-	i = a->size;
-	while (--i > -1)
-		a->nodes[i] = b->nodes[a->size - 1 - i];
+	while (++i <= s->top)
+		if (s->nodes[i].index > s->nodes[max].index)
+			max = i;
+	return (max);
 }
 
 int	stack_is_sorted(t_stack *s, int last, int order)
@@ -87,7 +67,7 @@ int	stack_is_sorted(t_stack *s, int last, int order)
 	int	i;
 	int	j;
 
-	if (stack_is_empty(s))
+	if (!stack_has_at_least_2_elements(s))
 		return (1);
 	n = s->nodes;
 	i = s->top + 1;
