@@ -6,27 +6,50 @@ int	get_max(t_stack *s);
 
 void	sort(t_stack *a, t_stack *b)
 {
-	t_node	*na;
-	t_node	*nb;
-	int	min;
-	int	max;
+	t_node	*n[2];
+	int	min[2];
+	int	max[2];
 
-	print_stacks(*a, *b);
+	//print_stacks(*a, *b);
 
 	if (stack_is_sorted(a, 0, ASCENDING))
 		return ;
-	na = a->nodes;
-	nb = b->nodes;
+	n[0] = a->nodes;
+	n[1] = b->nodes;
+	if (a->size == 2)
+		operate(SA, a, b);
+	else if (a->size == 3)
+	{
+		if (get_min(a) == a->top)
+			operate(RA, a, b);
+		if (get_max(a) == a->top)
+			operate(SA, a, b);
+		if (get_min(a) == 0)
+			operate(RRA, a, b);
+	}
+	/*
+		Find half of the elements wich are the smaller ones
+			and push it to b, order them there
+		The half with the bigger elements, order in a
+	*/
+	while (a->top > b->top + 1)
+	{
+		min[0] = get_min(a);
+		max[0] = get_max(a);
+		if (n[0][a->top].index < a->size / 2)
+			operate(PB, a, b);
+		else if (n[0][a->top - 1].index < a->size / 2)
+			operate(RA, a, b);
+		else
+			operate(RRA, a, b);
+	}
 	while (!stack_is_sorted(a, 0, ASCENDING))
 	{
-		min = get_min(a);
-		max = get_max(a);
 		return ;
 	}
 	while (!stack_is_empty(b))
 		operate(PA, a, b);
-	(void) na;
-	(void) nb;
+	(void) n;
 	(void) min;
 	(void) max;
 }
