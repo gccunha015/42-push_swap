@@ -14,7 +14,7 @@ void	operate(char *operation, t_stack *a, t_stack *b)
 			ft_strlen(REVERSE_ROTATE)))
 		reverse_rotate(operation, a, b);
 	print_operation(operation);
-	//print_stacks(*a, *b);
+//	print_stacks(*a, *b);
 }
 
 static void	print_operation(char *operation)
