@@ -21,6 +21,12 @@
 # include <stdio.h>
 
 
+enum	e_which_stack
+{
+	A,
+	B
+};
+
 enum	e_sort_order
 {
 	ASCENDING,
