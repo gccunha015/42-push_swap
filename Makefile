@@ -7,7 +7,7 @@ SRC			= push_swap.c \
 			  push.c \
 			  rotate.c \
 			  reverse_rotate.c \
-			  operate.c \
+			  execute.c \
 			  sort.c
 OBJECTS			= $(SRC:%.c=obj/%.o)
 INCLUDES		= -Iinclude -Ilibft/include

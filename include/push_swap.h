@@ -1,25 +1,23 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft.h"
-# define SWAP "sa sb ss"
-# define PUSH "pa pb"
-# define ROTATE "ra rb rr"
-# define REVERSE_ROTATE "rra rrb rrr"
-# define SA "sa"
-# define SB "sb"
-# define SS "ss"
-# define PA "pa"
-# define PB "pb"
-# define RA "ra"
-# define RB "rb"
-# define RR "rr"
-# define RRA "rra"
-# define RRB "rrb"
-# define RRR "rrr"
-
 
 # include <stdio.h>
 
+enum	e_operations
+{
+	SA,
+	SB,
+	SS,
+	PA,
+	PB,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR
+};
 
 enum	e_which_stack
 {
@@ -52,7 +50,7 @@ typedef struct s_program
 	t_stack	b;
 }	t_program;
 
-void	print_stacks(t_stack a, t_stack b);
+void	print_stacks(t_stack *oa, t_stack *ob);
 
 void	initialize_program(t_program *p, int argc);
 void	exit_program(t_program *p, int exit_code);
@@ -67,13 +65,13 @@ t_node	*stack_pop(t_stack *s);
 
 void	fill_stack_a(t_program *p, char **argv);
 
-void	swap(char *operation, t_stack *a, t_stack *b);
+void	swap(int operation, t_stack *a, t_stack *b);
 void	swap_nodes(t_node *x, t_node *y);
-void	push(char *operation, t_stack *a, t_stack *b);
-void	rotate(char *operation, t_stack *a, t_stack *b);
-void	reverse_rotate(char *operation, t_stack *a, t_stack *b);
+void	push(int operation, t_stack *a, t_stack *b);
+void	rotate(int operation, t_stack *a, t_stack *b);
+void	reverse_rotate(int operation, t_stack *a, t_stack *b);
 
-void	operate(char *operation, t_stack *a, t_stack *b);
+void	execute(int operation, t_stack *a, t_stack *b);
 
 void	sort(t_stack *a, t_stack *b);
 

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	print_stacks(t_stack a, t_stack b);
+void	print_stacks(t_stack *a, t_stack *b);
 
 int	main(int argc, char **argv)
 {
@@ -12,36 +12,42 @@ int	main(int argc, char **argv)
 	exit_program(&program, EXIT_SUCCESS);
 }
 
-void	print_stacks(t_stack a, t_stack b)
+void	print_stacks(t_stack *a, t_stack *b)
 {
-	t_node	*na, *nb;
+	t_node	*n[2];
+	int	top[2] = {a->top, -1};
 	char	*separator = "-------------------";
 
+	if (b)
+		top[B] = b->top;
 	printf("|%s|%s|\n", separator, separator);
-	for (int i = a.size - 1; i > -1; i--)
+	for (int i = a->size - 1; i > -1; i--)
 	{
-		na = NULL;
-		nb = NULL;
-		if (a.top == i)
-			na = stack_pop(&a);
-		if (b.top == i)
-			nb = stack_pop(&b);
-		if (na && nb)
+		if (b && top[A] == i && top[B] == i)
 		{
-			printf("| [%3i] %11i ", na->index, na->value);
-			printf("| [%3i] %11i ", nb->index, nb->value);
+			n[A] = &a->nodes[top[A]--];
+			n[B] = &b->nodes[top[B]--];
+			printf("| [%3i] %11i ", n[A]->index, n[A]->value);
+			printf("| [%3i] %11i ", n[B]->index, n[B]->value);
 		}
-		else if (na)
+		else if (top[A] == i)
 		{
-			printf("| [%3i] %11i ", na->index, na->value);
+			n[A] = &a->nodes[top[A]--];
+			printf("| [%3i] %11i ", n[A]->index, n[A]->value);
 			printf("| %17c ", ' ');
 		}
-		else if (nb)
+		else if (b && top[B] == i)
 		{
+			n[B] = &b->nodes[top[B]--];
 			printf("| %17c ", ' ');
-			printf("| [%3i] %11i ", nb->index, nb->value);
+			printf("| [%3i] %11i ", n[B]->index, n[B]->value);
 		}
-		if (na || nb)
+		else
+		{
+			n[A] = NULL;
+			n[B] = NULL;
+		}
+		if (n[A] || n[B])
 			printf("|\n");
 	}
 	printf("|%s|%s|\n", separator, separator);

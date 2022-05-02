@@ -2,11 +2,11 @@
 
 static void	_push(t_stack *source, t_stack *target);
 
-void	push(char *operation, t_stack *a, t_stack *b)
+void	push(int operation, t_stack *a, t_stack *b)
 {
-	if (!ft_strncmp(operation, PA, ft_strlen(operation)))
+	if (operation == PA)
 		_push(b, a);
-	else if (!ft_strncmp(operation, PB, ft_strlen(operation)))
+	else if (operation == PB)
 		_push(a, b);
 }
 

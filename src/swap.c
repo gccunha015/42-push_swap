@@ -2,13 +2,13 @@
 
 static void	_swap(t_stack *s);
 
-void	swap(char *operation, t_stack *a, t_stack *b)
+void	swap(int operation, t_stack *a, t_stack *b)
 {
-	if (!ft_strncmp(operation, SA, ft_strlen(operation)))
+	if (operation == SA)
 		_swap(a);
-	else if (!ft_strncmp(operation, SB, ft_strlen(operation)))
+	else if (operation == SB)
 		_swap(b);
-	else if (!ft_strncmp(operation, SS, ft_strlen(operation)))
+	else if (operation == SS)
 	{
 		_swap(a);
 		_swap(b);

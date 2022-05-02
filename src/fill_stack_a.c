@@ -12,7 +12,7 @@ void	fill_stack_a(t_program *p, char **argv)
 	i = p->a.size;
 	while (--i >= 0)
 	{
-		stack_push(&p->a, (t_node){ft_atoi(argv[i]), p->a.size - 1});
+		stack_push(&p->a, (t_node){ft_atoi(argv[i]), 0});
 		check_if_is_integer(argv[i], p->a.nodes[p->a.top].value, p);
 		check_if_is_duplicate(p);
 	}
@@ -47,6 +47,6 @@ static void	index_values(t_stack *a)
 		j = -1;
 		while (++j < a->size)
 			if (a->nodes[i].value < a->nodes[j].value)
-				a->nodes[i].index--;
+				a->nodes[i].index++;
 	}
 }

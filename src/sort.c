@@ -1,169 +1,120 @@
 #include "push_swap.h"
 
 void	divide(t_stack *a, t_stack *b);
-void	radix_sort(t_stack *a, t_stack *b);
-void	counting_sort(t_stack *a, t_stack *b, int decimal_place);
-
-
-int	stack_is_sorted(t_stack *s, int last, int order);
+int	stack_is_sorted(t_stack *s, int order);
 int	get_element_to_push_to_b(t_stack *a);
 int	get_min(t_stack *s);
 int	get_max(t_stack *s);
+void	sort_2_or_3(t_stack *a);
 
-void	sort(t_stack *a, t_stack *b)
-{
-	divide(a, b);
-	radix_sort(a, b);
-	while (!stack_is_empty(b))
-		operate(PA, a, b);
-}
+void	merge_sort(t_stack *s, int l, int r);
+void	merge(t_stack *s, int start, int mid, int end);
 
-/*
-	Find half of the elements wich are the smaller ones
-		and push it to b, order them there
-	The half with the bigger elements, order in a
-*/
-void	divide(t_stack *a, t_stack *b)
-{
-	int	element;
-
-	if (a->size < 4)
-		return ;
-	while (a->top > b->top + 1 && !stack_is_sorted(a, 0, ASCENDING))
-	{
-		element = get_element_to_push_to_b(a);
-		if (element == a->top)
-			operate(PB, a, b);
-		else if (element >= a->top / 2)
-			operate(RA, a, b);
-		else
-			operate(RRA, a, b);
-	}
-}
-
-void	radix_sort(t_stack *a, t_stack *b)
-{
-	int	decimal_place;
-
-	decimal_place = 1;
-	while (a->size / decimal_place > 0)
-	{
-		counting_sort(a, b, decimal_place);
-		decimal_place *= 10;
-	}
-}
-
-void	counting_sort(t_stack *a, t_stack *b, int decimal_place)
-{
-	int	i;
-	int	count[2][10];
-	int	*aux[2];
-
-	aux[A] = malloc(sizeof(**aux) * (a->top + 1));
-	if (!stack_is_empty(b))
-		aux[B] = malloc(sizeof(**aux) * (b->top + 1));
-	else
-		aux[B] = NULL;
-	i = -1;
-	while (++i <= b->top)
-	{
-		aux[A][i] = a->nodes[i].index;
-		aux[B][i] = b->nodes[i].index;
-	}
-	--i;
-	while (++i <= a->top)
-		aux[A][i] = a->nodes[i].index;
-	printf("a : ");
-	for (int w = 0; w <= a->top; w++)
-		printf("%i ", aux[A][w]);
-	printf("\nb : ");
-	for (int w = 0; w <= b->top; w++)
-		printf("%i ", aux[B][w]);
-	printf("\n");
-
-	(void) b;
-	(void) i;
-	(void) count;
-	(void) aux;
-	(void) decimal_place;
-	free(aux[A]);
-	if (aux[B])
-		free(aux[B]);
-}
-
-/*
 void	sort(t_stack *a, t_stack *b)
 {
 	t_node	*n[2];
 	int	min[2];
 	int	max[2];
+	int	i[2];
 
-	if (stack_is_sorted(a, 0, ASCENDING))
+	if (stack_is_sorted(a, ASCENDING))
 		return ;
+	if (a->size < 4)
+		return (sort_2_or_3(a));
+	divide(a, b);
+	while (!stack_is_sorted(a, ASCENDING))
+	{
+		merge(a, 0, a->top / 2, a->top);
+		merge(b, 0, b->top / 2, b->top);
+	}
+	while (!stack_is_empty(b))
+		execute(PA, a, b);
+	/*
 	n[A]= a->nodes;
 	n[B] = b->nodes;
-	if (a->size < 4)
+	while (!stack_is_sorted(a, ASCENDING) || !stack_is_empty(b))
 	{
-		while (!stack_is_sorted(a, 0, ASCENDING))
-		{
-			if (get_max(a) == a->top)
-				operate(RA, a, b);
-			else if (get_min(a) == 0)
-				operate(RRA, a, b);
-			else
-				operate(SA, a, b);
-		}
+		return ;
 	}
-	else
-	{
-		divide(a, b);
-		while (!stack_is_sorted(a, 0, ASCENDING) || !stack_is_empty(b))
-		{
-			if (!stack_is_sorted(a, 0, ASCENDING)
-				&& !stack_is_sorted(b, 0, DESCENDING))
-			{
-				min[A] = get_min(a);
-				max[A] = get_max(a);
-				min[B] = get_min(b);
-				max[B] = get_max(b);
-				if (max[A] == a->top && min[B] == b->top)
-					operate(RR, a, b);
-				else if (min[A] == 0 && max[B] == 0)
-					operate(RRR, a, b);
-				else
-					operate(SS, a, b);
-			}
-			if (!stack_is_sorted(a, 0, ASCENDING))
-			{
-				min[A] = get_min(a);
-				max[A] = get_max(a);
-				if (max[A] == a->top)
-					operate(RA, a, b);
-				else if (min[A] == 0)
-					operate(RRA, a, b);
-				else
-					operate(SA, a, b);
-			}
-			if (!stack_is_sorted(b, 0, DESCENDING))
-			{
-				min[B] = get_min(b);
-				max[B] = get_max(b);
-				if (min[B] == b->top)
-					operate(RB, a, b);
-				else if (max[B] == 0)
-					operate(RRB, a, b);
-				else
-					operate(SB, a, b);
-			}
-			if (stack_is_sorted(a, 0, ASCENDING)
-				&& stack_is_sorted(b, 0, DESCENDING)
-				&& !stack_is_empty(b))
-				operate(PA, a, b);
-		}
-	}
+	*/
+	(void) b;
 	(void) n;
+	(void) min;
+	(void) max;
+	(void) i;
 }
-*/
+
+void	merge_sort(t_stack *s, int l, int r)
+{
+	int	m;
+
+	m = (l + r) / 2;
+	if (m >= r)
+		return ;
+	merge_sort(s, l, m);
+	merge_sort(s, m + 1, r);
+	merge(s, l, m, r);
+}
+
+void	merge(t_stack *s, int start, int mid, int end)
+{
+	t_node	*n = s->nodes;
+	int	start2 = mid + 1;
+
+	if (n[mid].index < n[start2].index)
+		return ;
+	while (start <= mid && start2 <= end)
+	{
+		if (n[start].index < n[start2].index)
+		{
+			start++;
+			continue ;
+		}
+
+		t_node	v = n[start2];
+		int	i = start2 + 1;
+		while (--i != start)
+			n[i] = n[i - 1];
+		n[start] = v;
+		start++;
+		mid++;
+		start2++;
+	}
+}
+
+void	sort_2_or_3(t_stack *a)
+{
+	int	operation;
+
+	while (!stack_is_sorted(a, ASCENDING))
+	{
+		if (get_max(a) == a->top)
+			operation = RA;
+		else if (get_min(a) == 0)
+			operation = RRA;
+		else
+			operation = SA;
+		execute(operation, a, NULL);
+	}
+}
+
+void	divide(t_stack *a, t_stack *b)
+{
+	int	element;
+	int	operation;
+
+	while (a->top > b->top + 1 && !stack_is_sorted(a, ASCENDING))
+	{
+		element = get_element_to_push_to_b(a);
+		if (element == a->top)
+			operation = PB;
+		else if (element >= a->top / 2)
+			operation = RA;
+		else
+			operation = RRA;
+		execute(operation, a, b);
+	}
+}
 
 int	get_element_to_push_to_b(t_stack *a)
 {
@@ -173,10 +124,10 @@ int	get_element_to_push_to_b(t_stack *a)
 	i = a->top + 1;
 	while (--i >= a->top / 2)
 	{
-		if (a->nodes[i].index < a->size / 2)
+		if (a->nodes[i].index >= a->size / 2)
 			return (i);
 		j = a->top - i;
-		if (a->nodes[j].index < a->size / 2)
+		if (a->nodes[j].index >= a->size / 2)
 			return (j);
 	}
 	return (a->top);
@@ -192,7 +143,7 @@ int	get_min(t_stack *s)
 	min = 0;
 	i = 0;
 	while (++i <= s->top)
-		if (s->nodes[i].index < s->nodes[min].index)
+		if (s->nodes[i].value < s->nodes[min].value)
 			min = i;
 	return (min);
 }
@@ -207,29 +158,26 @@ int	get_max(t_stack *s)
 	max = 0;
 	i = 0;
 	while (++i <= s->top)
-		if (s->nodes[i].index > s->nodes[max].index)
+		if (s->nodes[i].value > s->nodes[max].value)
 			max = i;
 	return (max);
 }
 
-int	stack_is_sorted(t_stack *s, int last, int order)
+int	stack_is_sorted(t_stack *s, int order)
 {
 	t_node	*n;
 	int	i;
-	int	j;
 
 	if (!stack_has_at_least_2_elements(s))
 		return (1);
 	n = s->nodes;
-	i = s->top + 1;
-	while (--i > last)
+	i = -1;
+	while (++i <= s->top)
 	{
-		j = i;
-		while (--j > last - 1)
-			if ((order == ASCENDING && n[i].value > n[j].value)
-				|| (order == DESCENDING
-				&& n[i].value < n[j].value))
-				return (0);
+		if ((order == ASCENDING && n[i].index != i)
+			|| (order == DESCENDING
+			&& n[i].index != s->size - 1 - i))
+			return (0);
 	}
 	return (1);
 }

@@ -2,13 +2,13 @@
 
 static void	_reverse_rotate(t_stack *s);
 
-void	reverse_rotate(char *operation, t_stack *a, t_stack *b)
+void	reverse_rotate(int operation, t_stack *a, t_stack *b)
 {
-	if (!ft_strncmp(operation, RRA, ft_strlen(operation)))
+	if (operation == RRA)
 		_reverse_rotate(a);
-	else if (!ft_strncmp(operation, RRB, ft_strlen(operation)))
+	else if (operation == RRB)
 		_reverse_rotate(b);
-	else if (!ft_strncmp(operation, RRR, ft_strlen(operation)))
+	else if (operation == RRR)
 	{
 		_reverse_rotate(a);
 		_reverse_rotate(b);
