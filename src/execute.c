@@ -5,7 +5,9 @@ static char	*get_string(int operation);
 
 void	execute(int operation, t_stack *a, t_stack *b)
 {
-	if (operation >= SA && operation < PA)
+	if (operation < 0)
+		return ;
+	else if (operation >= SA && operation < PA)
 		swap(operation, a, b);
 	else if (operation < RA)
 		push(operation, a, b);
@@ -13,8 +15,6 @@ void	execute(int operation, t_stack *a, t_stack *b)
 		rotate(operation, a, b);
 	else if (operation <= RRR)
 		reverse_rotate(operation, a, b);
-	else
-		return ;
 	print_operation(operation);
 	print_stacks(a, b);
 }

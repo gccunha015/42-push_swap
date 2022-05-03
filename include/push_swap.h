@@ -73,6 +73,7 @@ void	reverse_rotate(int operation, t_stack *a, t_stack *b);
 
 void	execute(int operation, t_stack *a, t_stack *b);
 
+int	is_sorted(t_stack *s, int order);
 void	sort(t_stack *a, t_stack *b);
 
 #endif
