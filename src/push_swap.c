@@ -1,13 +1,11 @@
 #include "push_swap.h"
 
-void	print_stacks(t_stack *a, t_stack *b);
-
 int	main(int argc, char **argv)
 {
 	t_program	program;
 
 	initialize_program(&program, argc, argv);
-	print_stacks(&program.a, &program.b);
+	execute(RA, &program);
 	exit_program(&program, EXIT_SUCCESS);
 }
 

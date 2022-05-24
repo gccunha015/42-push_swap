@@ -3,7 +3,12 @@ SRC			= push_swap.c \
 			  program.c \
 			  stack.c \
 			  stack_operations.c \
-			  fill_stack_a.c
+			  fill_stack_a.c \
+			  execute.c \
+			  push.c \
+			  swap.c \
+			  rotate.c \
+			  reverse_rotate.c
 OBJECTS			= $(SRC:%.c=obj/%.o)
 INCLUDES		= -Iinclude -Ilibft/include
 MAKE_IN_PATH		= $(MAKE) -sC

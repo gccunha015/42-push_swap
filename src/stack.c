@@ -15,8 +15,6 @@ t_stack	stack_create(char name, int size, t_program *p)
 
 void	stack_delete(t_stack *s)
 {
-	if (!s)
-		return ;
 	free(s->nodes);
 	s->nodes = NULL;
 }
