@@ -1,15 +1,5 @@
 NAME			= push_swap
-SRC			= push_swap.c \
-			  program.c \
-			  stack.c \
-			  fill_stack_a.c \
-			  swap.c \
-			  push.c \
-			  rotate.c \
-			  reverse_rotate.c \
-			  execute.c \
-			  is_sorted.c \
-			  sort.c
+SRC			= push_swap.c
 OBJECTS			= $(SRC:%.c=obj/%.o)
 INCLUDES		= -Iinclude -Ilibft/include
 MAKE_IN_PATH		= $(MAKE) -sC
