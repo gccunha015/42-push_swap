@@ -5,7 +5,7 @@ int	main(int argc, char **argv)
 	t_program	program;
 
 	initialize_program(&program, argc, argv);
-	execute(RA, &program);
+	sort(&program);
 	exit_program(&program, EXIT_SUCCESS);
 }
 

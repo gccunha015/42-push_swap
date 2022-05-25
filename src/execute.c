@@ -24,7 +24,7 @@ static void	_print(int operation)
 		"pa\0", "pb\0",
 		"sa\0", "sb\0", "ss\0",
 		"ra\0", "rb\0", "rr\0",
-		"rra\0", "rrb\0", "rrr\0"
+		"rra", "rrb", "rrr"
 	};
 
 	write(STDOUT_FILENO, o[operation], 3);
