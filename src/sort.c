@@ -9,7 +9,7 @@ void	sort(t_program *p)
 	if (is_sorted(&p->a))
 		return ;
 	divide(p);
-	while (!is_sorted(&p->a) || !is_sorted(&p->b))
+	while (1)
 	{
 		operation[A] = get_operation(&p->a);
 		operation[B] = get_operation(&p->b);
@@ -23,10 +23,9 @@ void	sort(t_program *p)
 		else
 			break ;
 	}
-	/*
 	while (!is_empty(&p->b))
 		execute(PA, p);
-	*/
+	//print_stacks(&p->a, &p->b);
 }
 
 static int	is_sorted(t_stack *s)

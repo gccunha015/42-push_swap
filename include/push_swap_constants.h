@@ -1,6 +1,5 @@
 #ifndef PUSH_SWAP_CONSTANTS_H
 # define PUSH_SWAP_CONSTANTS_H
-# define OPERATIONS 11
 
 enum	e_which_stack
 {

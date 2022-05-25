@@ -4,29 +4,29 @@ static void	_print(int operation);
 
 void	execute(int operation, t_program *p)
 {
-	static int	(*o[OPERATIONS])(t_program *p) = {
+	static int	(*o[])(t_program *p) = {
 		pa, pb,
 		sa, sb, ss,
 		ra, rb, rr,
 		rra, rrb, rrr
 	};
 
-	if (!operation--)
+	if (operation < PA || operation > RRR)
 		return ;
-	if ((*o[operation])(p))
+	if ((*o[--operation])(p))
 		_print(operation);
-	print_stacks(&p->a, &p->b);
+//	print_stacks(&p->a, &p->b);
 }
 
 static void	_print(int operation)
 {
-	static char	*o[OPERATIONS] = {
+	static char	*o[] = {
 		"pa\0", "pb\0",
 		"sa\0", "sb\0", "ss\0",
 		"ra\0", "rb\0", "rr\0",
-		"rra", "rrb", "rrr"
+		"rra\0", "rrb\0", "rrr\0"
 	};
 
-	write(STDOUT_FILENO, o[operation], 3);
+	write(STDOUT_FILENO, o[operation], ft_strlen(o[operation]));
 	write(STDOUT_FILENO, "\n", 1);
 }
