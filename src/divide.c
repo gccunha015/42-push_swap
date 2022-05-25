@@ -8,7 +8,7 @@ void	divide(t_program *p)
 
 	if (p->a.size < 4)
 		return ;
-	while (p->a.top > p->b.top + 1)
+	while (1)
 	{
 		element = get_element_to_sort_in_b(&p->a);
 		if (element == p->a.top)
@@ -21,6 +21,8 @@ void	divide(t_program *p)
 			break ;
 	}
 }
+
+
 
 static int	get_element_to_sort_in_b(t_stack *a)
 {

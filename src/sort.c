@@ -4,9 +4,25 @@ static int	is_sorted(t_stack *s);
 
 void	sort(t_program *p)
 {
+	int	operation[3];
+
 	if (is_sorted(&p->a))
 		return ;
 	divide(p);
+	while (!is_sorted(&p->a) || !is_sorted(&p->b))
+	{
+		operation[A] = get_operation(&p->a);
+		operation[B] = get_operation(&p->b);
+		get_double_operation(operation);
+		if (operation[2])
+			execute(operation[2], p);
+		else if (operation[A])
+			execute(operation[A], p);
+		else if (operation[B])
+			execute(operation[B], p);
+		else
+			break ;
+	}
 	/*
 	while (!is_empty(&p->b))
 		execute(PA, p);
