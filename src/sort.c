@@ -5,17 +5,32 @@ static int	is_sorted(t_stack *s);
 void	sort(t_program *p)
 {
 	int	operation[3];
+	int	count = -1;
 
 	if (is_sorted(&p->a))
 		return ;
 	divide(p);
-	while (1)
+	
+	/*
+	execute(SA, p);
+	execute(RA, p);
+	execute(SA, p);
+	execute(RRA, p);
+	execute(RRA, p);
+	*/
+	
+	while (++count < 10)
 	{
 		operation[A] = get_operation(&p->a);
 		operation[B] = get_operation(&p->b);
 		get_double_operation(operation);
 		if (operation[2])
 			execute(operation[2], p);
+		else if (operation[A] && operation[B])
+		{
+			execute(operation[A], p);
+			execute(operation[B], p);
+		}
 		else if (operation[A])
 			execute(operation[A], p);
 		else if (operation[B])
@@ -23,9 +38,13 @@ void	sort(t_program *p)
 		else
 			break ;
 	}
+	/*
 	while (!is_empty(&p->b))
 		execute(PA, p);
+	*/
 	//print_stacks(&p->a, &p->b);
+	(void) count;
+	(void) operation;
 }
 
 static int	is_sorted(t_stack *s)
