@@ -27,7 +27,7 @@ int	rrb(t_program *p);
 int	rrr(t_program *p);
 
 void	sort(t_program *p);
-void	divide(t_program *p);
+void	divide(t_program *p, int second);
 int	get_operation(t_stack *s);
 void	get_double_operation(int *operation);
 

@@ -9,16 +9,11 @@ void	sort(t_program *p)
 
 	if (is_sorted(&p->a))
 		return ;
-	divide(p);
-	
+	divide(p, 1);
+	while (!is_empty(&p->b))
+		execute(PA, p);	
+	divide(p, 0);
 	/*
-	execute(SA, p);
-	execute(RA, p);
-	execute(SA, p);
-	execute(RRA, p);
-	execute(RRA, p);
-	*/
-	
 	while (++count < 10)
 	{
 		operation[A] = get_operation(&p->a);
@@ -38,6 +33,7 @@ void	sort(t_program *p)
 		else
 			break ;
 	}
+	*/
 	/*
 	while (!is_empty(&p->b))
 		execute(PA, p);
