@@ -2,6 +2,19 @@
 
 static int	is_sorted(t_stack *s);
 
+int	__get_max(t_stack *s)
+{
+	int	max;
+	int	i;
+
+	max = 0;
+	i = 0;
+	while (++i <= s->top)
+		if (s->nodes[i].value > s->nodes[max].value)
+			max = i;
+	return (max);
+}
+
 void	sort(t_program *p)
 {
 	int	operation[3];
@@ -9,10 +22,17 @@ void	sort(t_program *p)
 
 	if (is_sorted(&p->a))
 		return ;
-	divide(p, 1);
-	while (!is_empty(&p->b))
-		execute(PA, p);	
 	divide(p, 0);
+	divide(p, 1);
+	while (!is_sorted(&p->b))
+	{
+		if (__get_max(&p->b) >= p->b.top / 2)
+			execute(RB, p);
+		else
+			execute(RRB, p);
+	}
+	while (!is_empty(&p->b))
+		execute(PA, p);
 	/*
 	while (++count < 10)
 	{
