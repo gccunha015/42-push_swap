@@ -1,69 +1,74 @@
 #include "push_swap.h"
 
-static int	is_sorted(t_stack *s);
+int	is_sorted(t_stack *s);
+void	sort_up_to_3(t_program *p);
+void	sort_more_than_3(t_program *p);
 
-int	__get_max(t_stack *s)
+void	sort(t_program *p)
+{
+	if (is_sorted(&p->a))
+		return ;
+	if (p->a.size < 4)
+		return (sort_up_to_3(p));
+	return (sort_more_than_3(p));
+}
+
+int	get_min(t_stack *s, int ignore, int v_to_ignore)
+{
+	int	min;
+	int	i;
+
+	min = -1;
+	i = -1;
+	while (++i <= s->top)
+	{
+		if (ignore && s->nodes[i].value <= v_to_ignore)
+			continue ;
+		if (min == -1 || s->nodes[i].value < s->nodes[min].value)
+			min = i;
+	}
+	return (min);
+}
+
+int	get_max(t_stack *s, int ignore, int v_to_ignore)
 {
 	int	max;
 	int	i;
 
-	max = 0;
-	i = 0;
+	max = -1;
+	i = -1;
 	while (++i <= s->top)
-		if (s->nodes[i].value > s->nodes[max].value)
+	{
+		if (ignore && s->nodes[i].value >= v_to_ignore)
+			continue ;
+		if (max == -1 || s->nodes[i].value > s->nodes[max].value)
 			max = i;
+	}
 	return (max);
 }
 
-void	sort(t_program *p)
+void	sort_up_to_3(t_program *p)
 {
-	int	operation[3];
-	int	count = -1;
+	int	operation;
 
-	if (is_sorted(&p->a))
-		return ;
-	divide(p, 0);
-	divide(p, 1);
-	while (!is_sorted(&p->b))
+	while (!is_sorted(&p->a))
 	{
-		if (__get_max(&p->b) >= p->b.top / 2)
-			execute(RB, p);
+		if (get_max(&p->a, 0, 0) == p->a.top)
+			operation = RA;
+		else if (get_min(&p->a, 0, 0) == 0)
+			operation = RRA;
 		else
-			execute(RRB, p);
+			operation = SA;
+		execute(operation, p);
 	}
-	while (!is_empty(&p->b))
-		execute(PA, p);
-	/*
-	while (++count < 10)
-	{
-		operation[A] = get_operation(&p->a);
-		operation[B] = get_operation(&p->b);
-		get_double_operation(operation);
-		if (operation[2])
-			execute(operation[2], p);
-		else if (operation[A] && operation[B])
-		{
-			execute(operation[A], p);
-			execute(operation[B], p);
-		}
-		else if (operation[A])
-			execute(operation[A], p);
-		else if (operation[B])
-			execute(operation[B], p);
-		else
-			break ;
-	}
-	*/
-	/*
-	while (!is_empty(&p->b))
-		execute(PA, p);
-	*/
-	//print_stacks(&p->a, &p->b);
-	(void) count;
-	(void) operation;
 }
 
-static int	is_sorted(t_stack *s)
+void	sort_more_than_3(t_program *p)
+{
+	(void) p;
+}
+
+int	is_sorted(t_stack *s)
 {
 	int	is_b;
 	int	i;
@@ -71,15 +76,16 @@ static int	is_sorted(t_stack *s)
 	int	v[2];
 
 	is_b = s->name == 'b';
-	i = s->top + 1;
-	while (--i > 0)
+	i = -1;
+	while (++i < s->top)
 	{
 		v[0] = s->nodes[i].value;
 		j = i;
-		while (--j > -1)
+		while (++j <= s->top)
 		{
 			v[1] = s->nodes[j].value;
-			if ((!is_b && v[0] > v[1]) || (is_b && v[0] < v[1]))
+			if ((!is_b && v[0] < v[1])
+				|| (is_b && v[0] > v[1]))
 				return (0);
 		}
 	}

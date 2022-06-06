@@ -9,9 +9,7 @@ SRC			= push_swap.c \
 			  swap.c \
 			  rotate.c \
 			  reverse_rotate.c \
-			  sort.c \
-			  divide.c \
-			  get_operation.c
+			  sort.c
 OBJECTS			= $(SRC:%.c=obj/%.o)
 INCLUDES		= -Iinclude -Ilibft/include
 MAKE_IN_PATH		= $(MAKE) -sC
