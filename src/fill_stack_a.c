@@ -23,7 +23,7 @@ static void	check_if_is_integer(char *arg, int value, t_program *p)
 	size_t	arg_len;
 
 	arg_len = ft_strlen(arg);
-	if ((!value && ft_strncmp(arg, "0", arg_len))
+	if ((value == 0 && ft_strncmp(arg, "0", arg_len))
 		|| (value == -1 && ft_strncmp(arg, "-1", arg_len)))
 		exit_program(p, EXIT_FAILURE);
 }

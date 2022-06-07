@@ -1,71 +1,14 @@
 #include "push_swap.h"
 
 int	is_sorted(t_stack *s);
-void	sort_up_to_3(t_program *p);
-void	sort_more_than_3(t_program *p);
 
 void	sort(t_program *p)
 {
 	if (is_sorted(&p->a))
 		return ;
-	if (p->a.size < 4)
-		return (sort_up_to_3(p));
-	return (sort_more_than_3(p));
-}
-
-int	get_min(t_stack *s, int ignore, int v_to_ignore)
-{
-	int	min;
-	int	i;
-
-	min = -1;
-	i = -1;
-	while (++i <= s->top)
-	{
-		if (ignore && s->nodes[i].value <= v_to_ignore)
-			continue ;
-		if (min == -1 || s->nodes[i].value < s->nodes[min].value)
-			min = i;
-	}
-	return (min);
-}
-
-int	get_max(t_stack *s, int ignore, int v_to_ignore)
-{
-	int	max;
-	int	i;
-
-	max = -1;
-	i = -1;
-	while (++i <= s->top)
-	{
-		if (ignore && s->nodes[i].value >= v_to_ignore)
-			continue ;
-		if (max == -1 || s->nodes[i].value > s->nodes[max].value)
-			max = i;
-	}
-	return (max);
-}
-
-void	sort_up_to_3(t_program *p)
-{
-	int	operation;
-
-	while (!is_sorted(&p->a))
-	{
-		if (get_max(&p->a, 0, 0) == p->a.top)
-			operation = RA;
-		else if (get_min(&p->a, 0, 0) == 0)
-			operation = RRA;
-		else
-			operation = SA;
-		execute(operation, p);
-	}
-}
-
-void	sort_more_than_3(t_program *p)
-{
-	(void) p;
+	if (p->a.size < 6)
+		return (sort_up_to_5(p));
+	radix_sort(p);
 }
 
 int	is_sorted(t_stack *s)

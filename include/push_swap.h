@@ -5,30 +5,16 @@
 # include "push_swap_constants.h"
 # include "stack.h"
 # include "program.h"
-// Retirar quando projeto estiver finalizado
-# include <stdio.h>
-
-void	print_stacks(t_stack *a, t_stack *b);
-
-void	execute(int operation, t_program *p);
-
-void	swap(t_node *x, t_node *y);
-
-int	pa(t_program *p);
-int	pb(t_program *p);
-int	sa(t_program *p);
-int	sb(t_program *p);
-int	ss(t_program *p);
-int	ra(t_program *p);
-int	rb(t_program *p);
-int	rr(t_program *p);
-int	rra(t_program *p);
-int	rrb(t_program *p);
-int	rrr(t_program *p);
+# include "operations.h"
 
 void	sort(t_program *p);
-void	divide(t_program *p, int second);
-int	get_operation(t_stack *s);
-void	get_double_operation(int *operation);
+int	is_sorted(t_stack *s);
+
+void	sort_up_to_5(t_program *p);
+void	radix_sort(t_program *p);
+
+int	get_position(int element, t_stack *s);
+int	get_min(t_stack *s, int ignore, int v_to_ignore);
+int	get_max(t_stack *s, int ignore, int v_to_ignore);
 
 #endif
