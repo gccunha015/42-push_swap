@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcoelho- <gcoelho-@student.42sp.org>       +#+  +:+       +#+        */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/10 18:35:13 by gcoelho-          #+#    #+#             */
-/*   Updated: 2022/06/08 15:22:51 by gcoelho-         ###   ########.fr       */
+/*   Created: 2022/06/08 15:22:51 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/06/08 15:51:25 by gcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c);
+#ifndef TYPES_H
+# define TYPES_H
 
-int	ft_toupper(int c)
+typedef struct s_node
 {
-	if (ft_islower(c))
-		return (c - 32);
-	return (c);
-}
+	int	value;
+	int	index;
+}	t_node;
 
-static int	ft_islower(int c)
+typedef struct s_stack
 {
-	return (c >= 'a' && c <= 'z');
-}
+	t_node	*nodes;
+	char	name;
+	int		size;
+	int		top;
+}	t_stack;
+
+typedef struct s_program
+{
+	t_stack	a;
+	t_stack	b;
+}	t_program;
+
+#endif

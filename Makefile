@@ -20,7 +20,7 @@ MAKE_LIBFT		= $(MAKE_IN_PATH) libft
 LIBFT			= libft/libft.a
 LIBRARIES		= -Llibft -lft
 CC			= cc
-CC_FLAGS		= -Wall -Wextra -Werror -g
+CC_FLAGS		= -Wall -Wextra -Werror
 MKDIR			= mkdir -p
 RM			= rm -fr
 VALGRIND		= valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes

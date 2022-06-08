@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   program.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/08 15:22:51 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/06/08 15:36:11 by gcoelho-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	exit_program(t_program *p, int exit_code);
@@ -7,7 +19,7 @@ void	initialize_program(t_program *p, int argc, char **argv)
 	int	stack_size;
 
 	if (argc < 3)
-	       exit_program(NULL, EXIT_SUCCESS);
+		exit_program(NULL, EXIT_SUCCESS);
 	p->a.nodes = NULL;
 	p->b.nodes = NULL;
 	stack_size = argc - 1;

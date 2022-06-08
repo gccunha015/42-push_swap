@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   constants.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcoelho- <gcoelho-@student.42sp.org>       +#+  +:+       +#+        */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/10 18:35:13 by gcoelho-          #+#    #+#             */
-/*   Updated: 2022/06/08 15:22:51 by gcoelho-         ###   ########.fr       */
+/*   Created: 2022/06/08 15:22:51 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/06/08 15:51:09 by gcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_islower(int c);
+#ifndef CONSTANTS_H
+# define CONSTANTS_H
 
-int	ft_toupper(int c)
+enum	e_operations
 {
-	if (ft_islower(c))
-		return (c - 32);
-	return (c);
-}
+	PA = 1,
+	PB,
+	SA,
+	SB,
+	SS,
+	RA,
+	RB,
+	RR,
+	RRA,
+	RRB,
+	RRR
+};
 
-static int	ft_islower(int c)
-{
-	return (c >= 'a' && c <= 'z');
-}
+#endif

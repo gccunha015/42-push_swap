@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_position.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/08 15:22:51 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/06/08 15:32:45 by gcoelho-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int		get_min(t_stack *s, int ignore, int v_to_ignore);
-int		get_max(t_stack *s, int ignore, int v_to_ignore);
+int			get_min(t_stack *s, int ignore, int v_to_ignore);
+int			get_max(t_stack *s, int ignore, int v_to_ignore);
 static int	get_next_min_position(t_stack *s, int min);
 static int	get_next_max_position(t_stack *s, int max);
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/08 15:22:51 by gcoelho-          #+#    #+#             */
+/*   Updated: 2022/06/08 15:44:32 by gcoelho-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	is_sorted(t_stack *s);
@@ -16,19 +28,19 @@ int	is_sorted(t_stack *s)
 	int	is_b;
 	int	i;
 	int	j;
-	int	v[2];
+	int	value[2];
 
 	is_b = s->name == 'b';
 	i = -1;
 	while (++i < s->top)
 	{
-		v[0] = s->nodes[i].value;
+		value[0] = s->nodes[i].value;
 		j = i;
 		while (++j <= s->top)
 		{
-			v[1] = s->nodes[j].value;
-			if ((!is_b && v[0] < v[1])
-				|| (is_b && v[0] > v[1]))
+			value[1] = s->nodes[j].value;
+			if ((!is_b && value[0] < value[1])
+				|| (is_b && value[0] > value[1]))
 				return (0);
 		}
 	}
