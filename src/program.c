@@ -6,7 +6,7 @@
 /*   By: gcoelho- <gcoelho-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 15:22:51 by gcoelho-          #+#    #+#             */
-/*   Updated: 2022/06/08 15:36:11 by gcoelho-         ###   ########.fr       */
+/*   Updated: 2022/06/08 22:09:51 by gcoelho-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	initialize_program(t_program *p, int argc, char **argv)
 {
 	int	stack_size;
 
-	if (argc < 3)
+	if (argc < 2)
 		exit_program(NULL, EXIT_SUCCESS);
 	p->a.nodes = NULL;
 	p->b.nodes = NULL;
@@ -36,6 +36,6 @@ void	exit_program(t_program *p, int exit_code)
 		stack_delete(&p->b);
 	}
 	if (exit_code)
-		write(STDOUT_FILENO, "Error\n", 6);
+		write(STDERR_FILENO, "Error\n", 6);
 	exit(exit_code);
 }
